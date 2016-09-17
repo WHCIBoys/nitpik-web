@@ -3,12 +3,12 @@ import * as ReduxActions from 'redux-actions';
 
 export const LoadUserNits = ReduxActions.createAction(
   C.LOAD_USER_NITS.PENDING,
-  ({ userId }) => (getNits(userId))
+  () => (getNits())
 );
 
-export function getNits(userId) {
+export function getNits() {
   return (dispatch) => {
-    return fetch(`/nits/${userId}`)
+    return fetch('/nits/')
       .then((res) => {
         console.log(res);
         dispatch(
