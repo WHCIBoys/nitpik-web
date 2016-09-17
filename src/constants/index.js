@@ -53,3 +53,23 @@ export const MOCK_NITS_FOR_MAAZ = {
     },
   ],
 };
+
+export const FAV_FRIENDS_LIST = [{
+  firstName: 'Mandish',
+  lastName: 'Shah',
+}, {
+  firstName: 'Ramanpreet',
+  lastName: 'Nara',
+}, {
+  firstName: 'Maaz',
+  lastName: 'Ali',
+}, {
+  firstName: 'Brandon',
+  lastName: 'Bowen',
+}];
+
+export const LOAD_USER_NITS = {
+  PENDING: 'LOAD_USER_NITS_PENDING',
+  SUCCESS: 'LOAD_USER_NITS_SUCCESS',
+  ERROR: 'LOAD_USER_NITS_ERROR',
+};

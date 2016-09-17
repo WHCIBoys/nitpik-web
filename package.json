@@ -104,7 +104,6 @@
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.12.0",
     "webpack-split-by-path": "0.0.10",
-    "whatwg-fetch": "^1.0.0"
   },
   "dependencies": {
     "express": "^4.13.3",
