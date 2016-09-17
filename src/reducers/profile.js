@@ -8,12 +8,7 @@ const INITIAL_STATE = I.fromJS({
 
 export default ReduxActions.handleActions({
 
-  [C.LOAD_USER_NITS.SUCCESS]: (state, { payload }) => {
-    const { nits } = payload;
-    return state.set('nits', I.fromJS(nits));
-  },
-
-  [C.LOAD_USER_NITS.PENDING]: (state, { payload }) => {
+  [C.NIT_ACTIONS.LOAD_USER_NITS_SUCCESS]: (state, { payload }) => {
     const { nits } = payload;
     return state.set('nits', I.fromJS(nits));
   },
