@@ -39,6 +39,9 @@ function App({ children, session, login, logout }) {
         isVisible={ !isLoggedIn } />
 
       <Navigator testid="navigator" isVisible={ isLoggedIn }>
+        <NavigatorItem isVisible={ isLoggedIn } mr>
+          <Link to="/">Home</Link>
+        </NavigatorItem>
         <NavigatorItem isVisible={ isLoggedIn }>
           <Link to="/about">About Us</Link>
         </NavigatorItem>
