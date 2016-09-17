@@ -51,7 +51,7 @@ Edit [this file](server/proxy-config.js) to mount such APIs at a given path.
 
 ## License
 
-Copyright (c) 2015 rangle.io
+Copyright (c) 2016 WHCIBoyz
 
 [MIT License][MIT]
 
