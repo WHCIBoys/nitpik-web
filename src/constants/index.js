@@ -18,3 +18,9 @@ export const FAV_FRIENDS_LIST = [{
   firstName: 'Brandon',
   lastName: 'Bowen',
 }];
+
+export const LOAD_USER_NITS = {
+  LOAD_USER_NITS_PENDING: 'LOAD_USER_NITS_PENDING',
+  LOAD_USER_NITS_SUCCESS: 'LOAD_USER_NITS_SUCCESS',
+  LOAD_USER_NITS_ERROR: 'LOAD_USER_NITS_ERROR',
+};
