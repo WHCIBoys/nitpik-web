@@ -7,7 +7,6 @@ import { Link } from 'react-router';
 import Button from '../components/button';
 import Content from '../components/content';
 import LoginModal from '../components/login/login-modal';
-import Logo from '../components/logo';
 import Navigator from '../components/navigator';
 import NavigatorItem from '../components/navigator-item';
 
@@ -38,10 +37,7 @@ function App({ children, session, login, logout }) {
         isPending={ session.get('isLoading', false) }
         hasError={ session.get('hasError', false) }
         isVisible={ !isLoggedIn } />
-      <Navigator testid="navigator">
-        <NavigatorItem mr>
-          <Logo />
-        </NavigatorItem>
+      <Navigator testid="navigator" isVisible={ isLoggedIn }>
         <NavigatorItem isVisible={ isLoggedIn } mr>
           <Link to="/">Counter</Link>
         </NavigatorItem>

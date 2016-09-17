@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-starter",
+  "name": "nitpik-web",
   "version": "0.1.0",
-  "description": "A boiler-plate setup for React/Redux applications",
+  "description": "Application made at HackTheNorth",
   "license": "MIT",
   "engines": {
     "node": "6"
@@ -109,18 +109,5 @@
     "helmet": "^2.0.0",
     "http-proxy": "^1.12.1",
     "winston": "^2.1.1"
-  },
-  "keywords": [
-    "react",
-    "redux",
-    "starter",
-    "seed"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/rangle/react-redux-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/rangle/rangle-starter/issues"
   }
 }
