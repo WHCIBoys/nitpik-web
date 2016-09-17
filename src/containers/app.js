@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { loginUser, logoutUser } from '../actions/session';
+import { logoutUser, loginUser } from '../actions/session';
+import { getNits } from '../action-creators';
 
 import { Link } from 'react-router';
 import Button from '../components/button';
@@ -21,6 +22,7 @@ function mapDispatchToProps(dispatch) {
   return {
     login: () => dispatch(loginUser()),
     logout: () => dispatch(logoutUser()),
+    fetchNits: (nitId) => dispatch(getNits(nitId)),
   };
 }
 
@@ -37,7 +39,6 @@ function App({ children, session, login, logout }) {
         isPending={ session.get('isLoading', false) }
         hasError={ session.get('hasError', false) }
         isVisible={ !isLoggedIn } />
-
       <Navigator testid="navigator" isVisible={ isLoggedIn }>
         <NavigatorItem isVisible={ isLoggedIn } mr>
           <Link to="/">Home</Link>
@@ -67,6 +68,7 @@ App.propTypes = {
   session: React.PropTypes.object,
   login: React.PropTypes.func,
   logout: React.PropTypes.func,
+  fetchNits: React.PropTypes.func,
 };
 
 export default connect(

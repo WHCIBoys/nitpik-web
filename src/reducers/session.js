@@ -1,9 +1,4 @@
-import {
-  LOGIN_USER_PENDING,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_ERROR,
-  LOGOUT_USER,
-} from '../constants';
+import * as C from '../constants';
 
 import { fromJS } from 'immutable';
 
@@ -17,7 +12,7 @@ const INITIAL_STATE = fromJS({
 function sessionReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
 
-  case LOGIN_USER_PENDING:
+  case C.LOGIN_USER_PENDING:
     return state.merge(fromJS({
       token: null,
       user: {},
@@ -25,7 +20,7 @@ function sessionReducer(state = INITIAL_STATE, action = {}) {
       isLoading: true,
     }));
 
-  case LOGIN_USER_SUCCESS:
+  case C.LOGIN_USER_SUCCESS:
     return state.merge(fromJS({
       token: action.payload.token,
       user: action.payload.profile,
@@ -33,13 +28,13 @@ function sessionReducer(state = INITIAL_STATE, action = {}) {
       isLoading: false,
     }));
 
-  case LOGIN_USER_ERROR:
+  case C.LOGIN_USER_ERROR:
     return state.merge(fromJS({
       hasError: true,
       isLoading: false,
     }));
 
-  case LOGOUT_USER:
+  case C.LOGOUT_USER:
     return state.merge(INITIAL_STATE);
 
   default:
