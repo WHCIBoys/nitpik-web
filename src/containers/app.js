@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import { loginUser, logoutUser } from '../actions/session';
 
@@ -21,10 +22,11 @@ function mapDispatchToProps(dispatch) {
   return {
     login: () => dispatch(loginUser()),
     logout: () => dispatch(logoutUser()),
+    openUserProfile: (userId) => dispatch(push(`/profile/${userId}`)),
   };
 }
 
-function App({ children, session, login, logout }) {
+function App({ children, session, login, logout, openUserProfile }) {
   const token = session.get('token', false);
   const isLoggedIn = token && token !== null && typeof token !== 'undefined';
   const firstName = session.getIn(['user', 'first'], '');
@@ -49,6 +51,11 @@ function App({ children, session, login, logout }) {
         <NavigatorItem isVisible={ isLoggedIn } mr>
           <div data-testid="user-profile" className="h3">{ `${ firstName } ${ lastName }` }</div>
         </NavigatorItem>
+        <NavigatorItem isVisible={ isLoggedIn } mr>
+          <Button onClick={ () => openUserProfile(1) } className="bg-blue white">
+            My Profile
+          </Button>
+        </NavigatorItem>
         <NavigatorItem isVisible={ isLoggedIn }>
           <Button onClick={ logout } className="bg-red white">
             Logout
@@ -67,6 +74,7 @@ App.propTypes = {
   session: React.PropTypes.object,
   login: React.PropTypes.func,
   logout: React.PropTypes.func,
+  openUserProfile: React.PropTypes.func,
 };
 
 export default connect(

@@ -1,7 +1,7 @@
 import React from 'react';
 import Friend from './friend';
 
-function FriendsList({ friends, isVisible = true, onProfileClick }) {
+function FriendsList({ friendships, isVisible = true, onProfileClick }) {
   if (!isVisible) {
     return null;
   }
@@ -9,8 +9,8 @@ function FriendsList({ friends, isVisible = true, onProfileClick }) {
   return (
     <div className="flex flex-wrap">
       {
-        friends.map((friend, i) => {
-          return <Friend key={i} userInfo={friend} onProfileClick={onProfileClick}/>;
+        friendships.map((friendship, i) => {
+          return <Friend key={i} userInfo={friendship.friend} onProfileClick={onProfileClick}/>;
         })
       }
     </div>
@@ -18,7 +18,7 @@ function FriendsList({ friends, isVisible = true, onProfileClick }) {
 }
 
 FriendsList.propTypes = {
-  friends: React.PropTypes.array,
+  friendships: React.PropTypes.array,
   isVisible: React.PropTypes.bool,
   onProfileClick: React.PropTypes.func,
 };

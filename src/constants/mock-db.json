@@ -1,0 +1,60 @@
+{
+  "nits": [
+    {
+      "id": 1,
+      "content": "Sup Maaz",
+      "author": {
+        "id": 2,
+        "name": "Brandon Bowen",
+        "facebookId": "10205270670229481"
+      },
+      "user": {
+        "id": 1,
+        "name": "Maaz Ali",
+        "facebookId": "10207490889771713"
+      },
+      "isAnon": false
+    }
+  ],
+  "friendships": [
+    {
+      "id": 1,
+      "user": {
+        "id": 1,
+        "name": "Maaz Ali",
+        "facebookId": "10207490889771713"
+      },
+      "friend": {
+        "id": 2,
+        "name": "Brandon Bowen",
+        "facebookId": "10205270670229481"
+      }
+    },
+    {
+      "id": 2,
+      "user": {
+        "id": 1,
+        "name": "Maaz Ali",
+        "facebookId": "10207490889771713"
+      },
+      "friend": {
+        "id": 3,
+        "name": "Mandish Shah",
+        "facebookId": "10207412737774454"
+      }
+    },
+    {
+      "id": 3,
+      "user": {
+        "id": 1,
+        "name": "Maaz Ali",
+        "facebookId": "10207490889771713"
+      },
+      "friend": {
+        "id": 4,
+        "name": "Ramanpreet Nara",
+        "facebookId": "703342513133853"
+      }
+    }
+  ]
+}

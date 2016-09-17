@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 
 import Container from '../components/container';
 import FriendsList from '../components/friends-list';
-import * as C from '../constants';
+import * as MOCK_NITS_FOR_MAAZ from '../constants/mock-db.json';
 
 function mapStateToProps() {
   return {};
@@ -12,7 +12,7 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    openUserProfile: () => dispatch(push('/about')),
+    openUserProfile: (userId) => dispatch(push(`/profile/${userId}`)),
   };
 }
 
@@ -20,7 +20,7 @@ function HomePage({ openUserProfile }) {
   return (
     <Container testid="home" size={4} center>
       <h2 data-testid="home-heading" className="center caps" id="qa-counter-heading">Homepage</h2>
-      <FriendsList friends={C.FAV_FRIENDS_LIST} onProfileClick={openUserProfile}/>
+      <FriendsList friendships={MOCK_NITS_FOR_MAAZ.friendships} onProfileClick={openUserProfile}/>
     </Container>
   );
 }

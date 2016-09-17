@@ -1,20 +1,20 @@
 import React from 'react';
+import * as UserUtil from '../../utils/user';
 
 function Friend({ userInfo, onProfileClick }) {
   return (
     <div
-      className="flex items-center mt2 mx1 p2 bg-grey border rounded"
+      className="flex items-center mt2 mx1 p2 bg-gray border rounded"
       style={{width: '30%', cursor: 'pointer'}}
-      onClick={() => onProfileClick()}>
+      onClick={() => onProfileClick(userInfo.id)}>
       <img
-        className="rounded"
-        src="http://digventures.com/flag-fen/wp-content/uploads/placeholder-man-grid-240x268.png"
+        className="circle border white"
+        src={UserUtil.getUserFbProfileUrl(userInfo.facebookId, 'normal')}
         style={{
-          width: 'auto',
+          width: '100px',
           height: '100px',
         }}/>
-      <span className="ml2 mr1">{ userInfo.firstName }</span>
-      <span>{ userInfo.lastName }</span>
+      <span className="ml2 mr1 h3">{ userInfo.name }</span>
     </div>
   );
 }
