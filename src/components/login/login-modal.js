@@ -1,19 +1,21 @@
 import React from 'react';
 
-import { Modal, ModalContent } from '../modal';
-import LoginForm from './login-form';
+import { Modal } from '../modal';
+import FontAwesome from 'react-fontawesome';
+import Button from '../button';
 
-function LoginModal({ isVisible, isPending, hasError, onSubmit }) {
+function LoginModal({ isVisible, onSubmit }) {
   return (
     <Modal testid="login-form" isVisible={ isVisible }>
-      <ModalContent>
-        <h1 data-testid="login-header" className="mt0">Login</h1>
-
-        <LoginForm
-          isPending={ isPending }
-          hasError={ hasError }
-          onSubmit={ onSubmit } />
-      </ModalContent>
+      <Button className="bg-blue white" onClick={onSubmit}>
+        <div className="flex items-center">
+          <FontAwesome
+            className="fa-facebook-official"
+            name="facebookSignIn"
+            size="3x"/>
+          <div className="mx2 items-center"> Sign in with Facebook! </div>
+        </div>
+      </Button>
     </Modal>
   );
 }

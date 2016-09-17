@@ -8,7 +8,7 @@ function Modal({ isVisible, children, ...props }) {
 
   return (
     <div data-testid={props.testid} style={ styles }
-      className="fixed top-0 bottom-0 left-0 right-0 z1 bg-darken-3">
+      className="fixed top-0 bottom-0 left-0 right-0 z1 bg-darken-3 flex items-center justify-center">
       { children }
     </div>
   );

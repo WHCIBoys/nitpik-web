@@ -37,10 +37,8 @@ function App({ children, session, login, logout }) {
         isPending={ session.get('isLoading', false) }
         hasError={ session.get('hasError', false) }
         isVisible={ !isLoggedIn } />
+
       <Navigator testid="navigator" isVisible={ isLoggedIn }>
-        <NavigatorItem isVisible={ isLoggedIn } mr>
-          <Link to="/">Counter</Link>
-        </NavigatorItem>
         <NavigatorItem isVisible={ isLoggedIn }>
           <Link to="/about">About Us</Link>
         </NavigatorItem>

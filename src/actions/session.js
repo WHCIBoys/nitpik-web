@@ -5,16 +5,11 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
   LOGOUT_USER,
-  FORM_RESET,
+  // FORM_RESET,
 } from '../constants';
 
 export function loginUser() {
-  return (dispatch, getState) => {
-    const user = {
-      username: getState().form.login.username.value,
-      password: getState().form.login.password.value,
-    };
-
+  return (dispatch) => {
     return dispatch({
       types: [
         LOGIN_USER_PENDING,
@@ -22,13 +17,8 @@ export function loginUser() {
         LOGIN_USER_ERROR,
       ],
       payload: {
-        promise: login(user)
+        promise: login()
           .then((res) => {
-            dispatch({
-              type: FORM_RESET,
-              form: 'login',
-            });
-
             return res;
           }),
       },
