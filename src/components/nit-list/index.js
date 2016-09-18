@@ -19,7 +19,7 @@ function NitList({ nitList }) {
 }
 
 NitList.propTypes = {
-  nitList: React.PropTypes.instaceOf(I.List()),
+  nitList: React.PropTypes.instanceOf(I.List),
   isVisible: React.PropTypes.bool,
 };
 
