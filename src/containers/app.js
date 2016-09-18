@@ -6,13 +6,14 @@ import { logoutUser, requestLogin } from '../actions/session';
 import { getNits } from '../action-creators';
 
 import { Link } from 'react-router';
-import Button from '../components/button';
+// import Button from '../components/button';
 import Content from '../components/content';
 import LoginModal from '../components/login/login-modal';
 import Navigator from '../components/navigator';
 import NavigatorItem from '../components/navigator-item';
 import Container from '../components/container';
 import Loader from '../components/ui/loader';
+import FontAwesome from 'react-fontawesome';
 
 function mapStateToProps(state) {
   return {
@@ -45,6 +46,8 @@ function App({ children, session, login, logout, openUserProfile }) {
     );
   }
 
+  console.log(logout);
+
   return (
     <div>
       <LoginModal
@@ -54,21 +57,17 @@ function App({ children, session, login, logout, openUserProfile }) {
         isVisible={ !isLoggedIn } />
       <Navigator testid="navigator" isVisible={ isLoggedIn }>
         <NavigatorItem isVisible={ isLoggedIn } mr>
-          <Link to="/">Home</Link>
+          <Link to="/"><FontAwesome className="fa-home white" size="2x" name="home"/></Link>
         </NavigatorItem>
         <div className="flex flex-auto" />
         <NavigatorItem isVisible={ isLoggedIn } mr>
           <div data-testid="user-profile" className="h3">{ `${ firstName } ${ lastName }` }</div>
         </NavigatorItem>
         <NavigatorItem isVisible={ isLoggedIn } mr>
-          <Button onClick={ () => openUserProfile(1) } className="bg-blue white">
-            My Profile
-          </Button>
+          <FontAwesome onClick={ () => openUserProfile(1) } className="fa-user white" style={{cursor: 'pointer'}} size="2x" name="myProfile"/>
         </NavigatorItem>
         <NavigatorItem isVisible={ isLoggedIn }>
-          <Button onClick={ logout } className="bg-red white">
-            Logout
-          </Button>
+          <FontAwesome onClick={ logout } className="fa-sign-out white" style={{cursor: 'pointer'}} size="2x" name="signOut"/>
         </NavigatorItem>
       </Navigator>
       <Content isVisible={ isLoggedIn }>

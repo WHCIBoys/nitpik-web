@@ -29,7 +29,7 @@ export function login(store) {
     routing: {
       locationBeforeTransitions: {
         query: {
-          access_code: accessToken,
+          access_token: accessToken,
           jwt: jwtToken,
         },
       },
