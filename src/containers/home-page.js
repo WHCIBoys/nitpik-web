@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
 function HomePage({ openUserProfile }) {
   return (
     <Container testid="home" size={4} center>
-      <h2 data-testid="home-heading" className="center caps" id="qa-counter-heading">Homepage</h2>
+      <h2 data-testid="home-heading" className="center caps white" style={{position: 'relative', marginTop: '-70px', marginBottom: '50px'}} id="qa-counter-heading">Friends</h2>
       <FriendsList friendships={MOCK_NITS_FOR_MAAZ.friendships} onProfileClick={openUserProfile}/>
     </Container>
   );

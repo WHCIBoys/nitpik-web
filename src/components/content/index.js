@@ -2,7 +2,7 @@ import React from 'react';
 
 function Content({ children, isVisible }) {
   return (
-    <main>
+    <main style={{paddingBottom: '20px'}}>
       { isVisible ? children : null }
     </main>
   );

@@ -6,7 +6,15 @@ function Navigator({ children, isVisible, ...props }) {
   }
 
   return (
-    <nav data-testid={ props.testid } className="flex items-center p1 bg-white border-bottom">
+    <nav className="flex p1 bg-black"
+      style={{
+        position: 'relative',
+        height: '300px',
+        backgroundImage: 'url("http://www.pixelstalk.net/wp-content/uploads/2016/06/Free-Desktop-Starry-Night-Wallpaper-Download.jpg")',
+        backgroundColor: '#000',
+        backgroundSize: 'cover',
+        backgroundPosition: 'bottom center',
+      }} data-testid={ props.testid }>
       { children }
     </nav>
   );
