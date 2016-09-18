@@ -32,6 +32,7 @@ function mapDispatchToProps(dispatch) {
 
 function App({ children, session, login, logout, openUserProfile }) {
   const token = session.get('token', false);
+  const loggedInUserId = session.getIn(['user', 'id'], 0);
   const isFetching = session.get('isLoading', false);
   const isLoggedIn = token && token !== null && typeof token !== 'undefined';
   const firstName = session.getIn(['user', 'first'], '');
@@ -63,7 +64,7 @@ function App({ children, session, login, logout, openUserProfile }) {
           <div data-testid="user-profile" className="h3">{ `${ firstName } ${ lastName }` }</div>
         </NavigatorItem>
         <NavigatorItem isVisible={ isLoggedIn } mr>
-          <FontAwesome onClick={ () => openUserProfile(1) } className="fa-user white" style={{cursor: 'pointer'}} size="2x" name="myProfile"/>
+          <FontAwesome onClick={ () => openUserProfile(loggedInUserId) } className="fa-user white" style={{cursor: 'pointer'}} size="2x" name="myProfile"/>
         </NavigatorItem>
         <NavigatorItem isVisible={ isLoggedIn }>
           <FontAwesome onClick={ logout } className="fa-sign-out white" style={{cursor: 'pointer'}} size="2x" name="signOut"/>
