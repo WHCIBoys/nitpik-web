@@ -9,18 +9,12 @@ import * as SessionActions from '../actions/session';
 import * as ProfileActionsCreator from '../action-creators/profile';
 import a$ync from '../utils/a$ync';
 
-const profileQuery = (nextState) => {
-  const { params: { profileId } } = nextState;
-  console.log(profileId);
-  // Dispatch the actions here
-};
-
 export default (store) => (
   <Route path="/" component={ App }>
     <IndexRoute component={ HomePage }/>
     <Route path="about" component={ AboutPage }/>
     <Route path="login/facebook" onEnter={() => a$ync(login)(store)}/>
-    <Route onEnter={profileQuery} path="profile/:profileId" component={ UserProfile }/>
+    <Route path="profile/:profileId" component={ UserProfile }/>
   </Route>
 );
 
