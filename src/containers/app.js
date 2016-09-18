@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
     login: () => dispatch(loginUser()),
     logout: () => dispatch(logoutUser()),
     openUserProfile: (userId) => dispatch(push(`/profile/${userId}`)),
-    fetchNits: () => dispatch(getNits()),
+    fetchNits: (userId) => dispatch(getNits(userId)),
   };
 }
 
