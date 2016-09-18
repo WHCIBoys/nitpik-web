@@ -38,6 +38,7 @@ export function login(store) {
 
   if (accessToken && jwtToken) {
     store.dispatch(SessionActions.loginUser(accessToken, jwtToken));
+    store.dispatch(SessionActions.getUserInfo());
   }
 
   return store.dispatch(push('/'));

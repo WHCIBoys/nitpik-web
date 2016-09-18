@@ -6,7 +6,6 @@ import { logoutUser, requestLogin } from '../actions/session';
 import { getNits } from '../action-creators';
 
 import { Link } from 'react-router';
-// import Button from '../components/button';
 import Content from '../components/content';
 import LoginModal from '../components/login/login-modal';
 import Navigator from '../components/navigator';
@@ -41,12 +40,12 @@ function App({ children, session, login, logout, openUserProfile }) {
   if (isFetching) {
     return (
       <Container>
-        <Loader/>
+        <div style={{ width: '100%', height: '100%', position: 'absolute' }}>
+          <Loader/>
+        </div>
       </Container>
     );
   }
-
-  console.log(logout);
 
   return (
     <div>

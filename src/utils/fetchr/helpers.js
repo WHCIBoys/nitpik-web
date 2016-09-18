@@ -20,7 +20,7 @@ export const authorizeHeaders = (headers) => {
   if (typeof token !== 'undefined') {
     return compose(
       merge(headers),
-      objOf('Authentication')
+      objOf('Authorization')
     )(token);
   }
   return headers;

@@ -29,6 +29,19 @@ function sessionReducer(state = INITIAL_STATE, action = {}) {
       isLoading: false,
     }));
 
+  case C.AUTH_ACTIONS.GET_USER_INFO_SUCCESS:
+    return state.merge(fromJS({
+      user: action.payload.userProfile,
+      hasError: false,
+      isLoading: false,
+    }));
+
+  case C.AUTH_ACTIONS.GET_USER_INFO_ERROR:
+    return state.merge(fromJS({
+      hasError: true,
+      isLoading: false,
+    }));
+
   case C.AUTH_ACTIONS.LOGIN_USER_ERROR:
     return state.merge(fromJS({
       hasError: true,
