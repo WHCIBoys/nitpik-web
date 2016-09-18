@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as MOCK_NITS_FOR_MAAZ from '../constants/mock-db.json';
 import * as UserUtil from '../utils/user';
+import * as I from 'immutable';
 
 import Container from '../components/container';
 import Button from '../components/button';
@@ -9,9 +9,15 @@ import FontAwesome from 'react-fontawesome';
 import NitList from '../components/nit-list';
 import * as NitActions from '../action-creators/nit';
 import * as C from '../constants';
+import cx from 'classnames';
 
-function mapStateToProps() {
-  return {};
+
+function mapStateToProps(state) {
+  return {
+    loggedInUser: state.session.get('user', I.Map()),
+    allNits: state.profile.get('nits', I.List()),
+    friendships: state.profile.get('friendships', I.List()),
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -23,19 +29,19 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-function UserProfile({ params: { profileId }, saveNitToDb, saveNitToState }) {
-  const NITS_FOR_CURRENT_USER = MOCK_NITS_FOR_MAAZ.nits.filter((nit) =>
-    nit.user.id === Number(profileId
-  ));
-
-  const profileUser = MOCK_NITS_FOR_MAAZ.friendships
-      .map((friendship) => friendship.friend)
-      .concat(MOCK_NITS_FOR_MAAZ.friendships[0].user)
-      .filter((friend) => friend.id === Number(profileId))[0];
-
-  const curUser = {
-    'facebookId': '10207490889771713',
-  };
+function UserProfile({
+    params: { profileId },
+    saveNitToDb,
+    saveNitToState,
+    loggedInUser,
+    allNits,
+    friendships,
+  }) {
+  const userIsOnHisOwnProfile = loggedInUser.get('id') === profileId;
+  const profileUser = friendships
+                        .map((friendship) => friendship.get('friend'))
+                        .push(loggedInUser)
+                        .filter((friend) => friend.get('id') === profileId).get(0, I.Map());
 
   return (
     <Container size={2} center>
@@ -47,7 +53,7 @@ function UserProfile({ params: { profileId }, saveNitToDb, saveNitToState }) {
             height: '100px',
             margin: 'auto',
             backgroundSize: 'cover',
-            backgroundImage: `url(${UserUtil.getUserFbProfileUrl(profileUser.facebookId, 'normal')})`,
+            backgroundImage: `url(${UserUtil.getUserFbProfileUrl(profileUser.get('facebookId'), 'normal')})`,
             backgroundPosition: 'center center',
           }}/>
         <span className="flex justify-center h2 my1 caps white"
@@ -56,10 +62,10 @@ function UserProfile({ params: { profileId }, saveNitToDb, saveNitToState }) {
             marginBottom: '100px',
           }}
           id="qa-counter-heading">
-          {profileUser.name}
+          {profileUser.get('name')}
         </span>
-        <div className="flex flex-column" style={{boxShadow: 'rgba(0, 0, 0, 0.2) 1px 1px 3px'}}>
-          <div className="flex" style={{padding: '10px'}}>
+        <div className={cx('flex flex-column', { 'display-none': userIsOnHisOwnProfile })} style={{boxShadow: 'rgba(0, 0, 0, 0.2) 1px 1px 3px'}}>
+          <div className={cx('flex')} style={{padding: '10px'}}>
             <div
               className="circle border white"
               style={{
@@ -70,40 +76,40 @@ function UserProfile({ params: { profileId }, saveNitToDb, saveNitToState }) {
                 marginTop: '0',
                 marginRight: '10px',
                 backgroundSize: 'cover',
-                backgroundImage: `url(${UserUtil.getUserFbProfileUrl(curUser.facebookId, 'normal')})`,
+                backgroundImage: `url(${UserUtil.getUserFbProfileUrl(loggedInUser.get('facebookId'), 'normal')})`,
                 backgroundPosition: 'center center',
               }}/>
-            <textarea
-              className="mb1"
-              autoFocus
-              rows="7"
-              onBlur={(e) => saveNitToState({
-                id: profileId,
-                nitContent: e.target.value,
-              })}
-              style={{ 'width': '100%', borderWidth: '2px', border: 'none', resize: 'none' }}/>
+              <textarea
+                className="mb1"
+                autoFocus
+                rows="7"
+                onBlur={(e) => saveNitToState({
+                  id: profileId,
+                  nitContent: e.target.value,
+                })}
+                style={{ 'width': '100%', borderWidth: '2px', border: 'none', resize: 'none' }}/>
           </div>
-          <div style={{'width': '100%', 'text-align': 'right', borderTop: `1px solid ${C.grey200}`}} >
-            <Button className="bg-white white" style={{width: '100px', paddingTop: '5px', paddingBottom: '5px', borderRadius: '0px', borderLeft: `1px solid ${C.grey200}`}} onClick={() => saveNitToDb()}>
-              <div className="flex items-center justify-center" style={{color: C.grey300}}>
-                <FontAwesome
-                  className="fa-check"
-                  name="facebookSignIn"/>
-                <div className="mx2 items-center">Post</div>
-              </div>
-            </Button>
+            <div style={{'width': '100%', 'textAlign': 'right', borderTop: `1px solid ${C.grey200}`}} >
+              <Button className="bg-white white" style={{width: '100px', paddingTop: '5px', paddingBottom: '5px', borderRadius: '0px', borderLeft: `1px solid ${C.grey200}`}} onClick={() => saveNitToDb()}>
+                <div className="flex items-center justify-center" style={{color: C.grey300}}>
+                  <FontAwesome
+                    className="fa-check"
+                    name="facebookSignIn"/>
+                  <div className="mx2 items-center">Post</div>
+                </div>
+              </Button>
+            </div>
           </div>
-        </div>
 
-        <div>
-          {
-            NITS_FOR_CURRENT_USER.length > 0
-            ? <NitList nitList={MOCK_NITS_FOR_MAAZ.nits}/>
-            : <div className="h3 pt2 center caps" style={{color: C.grey400}}>
-                no public nits found
-              </div>
-          }
-        </div>
+          <div>
+            {
+              allNits.length > 0
+              ? <NitList nitList={allNits}/>
+              : <div className="h3 pt2 center caps" style={{color: C.grey400}}>
+                  no public nits found
+                </div>
+            }
+          </div>
       </div>
     </Container>
   );
@@ -113,6 +119,9 @@ UserProfile.propTypes = {
   params: React.PropTypes.object,
   saveNitToDb: React.PropTypes.func,
   saveNitToState: React.PropTypes.func,
+  loggedInUser: React.PropTypes.instanceOf(I.Map),
+  allNits: React.PropTypes.instanceOf(I.List),
+  friendships: React.PropTypes.instanceOf(I.List),
 };
 
 export default connect(

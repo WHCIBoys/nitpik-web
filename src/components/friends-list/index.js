@@ -1,5 +1,7 @@
 import React from 'react';
 import Friend from './friend';
+import * as I from 'immutable';
+
 
 function FriendsList({ friendships, isVisible = true, onProfileClick }) {
   if (!isVisible) {
@@ -10,7 +12,7 @@ function FriendsList({ friendships, isVisible = true, onProfileClick }) {
     <div className="flex flex-wrap">
       {
         friendships.map((friendship, i) => {
-          return <Friend key={i} userInfo={friendship.friend} onProfileClick={onProfileClick}/>;
+          return <Friend key={i} userInfo={friendship.get('friend')} onProfileClick={onProfileClick}/>;
         })
       }
     </div>
@@ -18,7 +20,7 @@ function FriendsList({ friendships, isVisible = true, onProfileClick }) {
 }
 
 FriendsList.propTypes = {
-  friendships: React.PropTypes.array,
+  friendships: React.PropTypes.instanceOf(I.List),
   isVisible: React.PropTypes.bool,
   onProfileClick: React.PropTypes.func,
 };

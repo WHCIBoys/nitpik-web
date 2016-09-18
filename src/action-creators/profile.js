@@ -5,7 +5,7 @@ export function loadUserNits() {
   return (dispatch, getState) => {
     const userId = getState().session.getIn(['user', 'id'], 0);
     dispatch( { type: C.PROFILE_ACTIONS.LOAD_USER_NITS_PENDING });
-    return fetchr.get(`api/nits?user_id=${userId}`)
+    return fetchr.get(`api/nits?userId=${userId}`)
       .then((res) => {
         dispatch(
           { type: C.PROFILE_ACTIONS.LOAD_USER_NITS_SUCCESS, payload: { nits: res } }
