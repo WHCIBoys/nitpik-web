@@ -1,10 +1,7 @@
 import * as C from '../constants';
 
-export const getUserInfo = (accessToken) => {
+export const saveNitToDb = () => {
   return (dispatch) => {
-    console.log(accessToken);
-    dispatch( { type: C.AUTH_ACTIONS.GET_USER_INFO });
-    console.log('got here');
     return fetch(`${C.FACEBOOK_GRAPH_URL}me?fields=id,name`)
       .then((res) => {
         console.log(res);
@@ -19,3 +16,8 @@ export const getUserInfo = (accessToken) => {
       });
   };
 };
+
+export const saveNitToState = ReduxActions.createAction(
+  C.NIT_ACTIONS.SAVE_USER_NIT_STATE,
+  ({ id, nitContent }) => ({ payload: {id, nitContent} }),
+);

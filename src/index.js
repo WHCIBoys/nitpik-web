@@ -21,7 +21,7 @@ if (!__TEST__) {
     <div>
       <Provider store={ store }>
         <Router history={ history }>
-          { routes }
+          { routes(store) }
         </Router>
       </Provider>
     </div>,

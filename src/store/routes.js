@@ -5,7 +5,7 @@ import App from '../containers/app';
 import AboutPage from '../containers/about-page';
 import HomePage from '../containers/home-page';
 import UserProfile from '../containers/user-profile';
-import * as AuthActionCreators from '../actions-creators/auth';
+import * as AuthActionCreators from '../action-creators/auth';
 
 const profileQuery = (nextState) => {
   const { params: { profileId } } = nextState;
@@ -13,7 +13,7 @@ const profileQuery = (nextState) => {
   // Dispatch the actions here
 };
 
-export default (
+export default (store) => (
   <Route path="/" component={ App }>
     <IndexRoute component={ HomePage }/>
     <Route path="about" component={ AboutPage }/>
@@ -35,7 +35,6 @@ export function login(store) {
   } = currentState;
 
   if (accessToken) {
-    store.dispatch(AuthActionCreators.savedUserAccessToken(accessToken));
     store.dispatch(AuthActionCreators.getUserInfo(accessToken));
   }
 

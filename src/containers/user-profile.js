@@ -6,6 +6,7 @@ import Container from '../components/container';
 import Button from '../components/button';
 import FontAwesome from 'react-fontawesome';
 import NitList from '../components/nit-list';
+import * as NitActions from '../action-creators/nit';
 
 // import * as MOCK_NITS_FOR_MAAZ from '../constants/mock-db.json';
 
@@ -13,11 +14,14 @@ function mapStateToProps() {
   return {};
 }
 
-function mapDispatchToProps() {
-  return {};
+function mapDispatchToProps(dispatch) {
+  return {
+    saveNitToDb: () => dispatch(NitActions.saveNitToDb()),
+    saveNitToState: (nitInfo) => dispatch(NitActions.saveNitToState(nitInfo)),
+  };
 }
 
-function UserProfile({ params: { profileId }}) {
+function UserProfile({ params: { profileId }}, saveNitToDb, saveNitToState ) {
   const NITS_FOR_CURRENT_USER = MOCK_NITS_FOR_MAAZ.nits.filter((nit) =>
     nit.user.id === Number(profileId
   ));
@@ -36,8 +40,12 @@ function UserProfile({ params: { profileId }}) {
           autoFocus
           rows="7"
           cols="50"
+          onBlur={(e) => saveNitToState({
+            id: profileId,
+            nitContent: e.target.value,
+          })}
           style={{ 'maxWidth': '100%', borderStyle: 'groove', borderWidth: '2px' }}/>
-        <Button className="bg-green white">
+        <Button className="bg-green white" onClick={() => saveNitToDb()}>
           <div className="flex items-center justify-center">
             <FontAwesome
               className="fa-check"
@@ -62,6 +70,8 @@ function UserProfile({ params: { profileId }}) {
 
 UserProfile.propTypes = {
   params: React.PropTypes.object,
+  saveNitToDb: React.PropTypes.func,
+  saveNitToState: React.PropTypes.func,
 };
 
 export default connect(

@@ -12,7 +12,7 @@ const INITIAL_STATE = fromJS({
 function sessionReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
 
-  case C.LOGIN_USER_PENDING:
+  case C.AUTH_ACTIONS.LOGIN_USER_PENDING:
     return state.merge(fromJS({
       token: null,
       user: {},
@@ -20,7 +20,7 @@ function sessionReducer(state = INITIAL_STATE, action = {}) {
       isLoading: true,
     }));
 
-  case C.LOGIN_USER_SUCCESS:
+  case C.AUTH_ACTIONS.LOGIN_USER_SUCCESS:
     return state.merge(fromJS({
       token: action.payload.token,
       user: action.payload.profile,
@@ -28,13 +28,13 @@ function sessionReducer(state = INITIAL_STATE, action = {}) {
       isLoading: false,
     }));
 
-  case C.LOGIN_USER_ERROR:
+  case C.AUTH_ACTIONS.LOGIN_USER_ERROR:
     return state.merge(fromJS({
       hasError: true,
       isLoading: false,
     }));
 
-  case C.LOGOUT_USER:
+  case C.AUTH_ACTIONS.LOGOUT_USER:
     return state.merge(INITIAL_STATE);
 
   default:
