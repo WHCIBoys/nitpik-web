@@ -6,6 +6,7 @@ import AboutPage from '../containers/about-page';
 import HomePage from '../containers/home-page';
 import UserProfile from '../containers/user-profile';
 import * as SessionActions from '../actions/session';
+import * as ProfileActionsCreator from '../action-creators/profile';
 import a$ync from '../utils/a$ync';
 
 const profileQuery = (nextState) => {
@@ -39,6 +40,7 @@ export function login(store) {
   if (accessToken && jwtToken) {
     store.dispatch(SessionActions.loginUser(accessToken, jwtToken));
     store.dispatch(SessionActions.getUserInfo());
+    store.dispatch(ProfileActionsCreator.loadUserFriendships());
   }
 
   return store.dispatch(push('/'));

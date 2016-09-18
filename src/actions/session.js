@@ -1,5 +1,6 @@
 import * as C from '../constants';
 import * as fetchr from '../utils/fetchr';
+import * as ProfileActionsCreator from '../action-creators/profile';
 
 export function loginUser(accessToken, jwtToken) {
   return {
@@ -31,6 +32,7 @@ export const getUserInfo = () => {
         dispatch(
           { type: C.AUTH_ACTIONS.GET_USER_INFO_SUCCESS, payload: {userProfile: res} }
         );
+        dispatch(ProfileActionsCreator.loadUserNits());
       })
       .catch((err) => {
         dispatch(
