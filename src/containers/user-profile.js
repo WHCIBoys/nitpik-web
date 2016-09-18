@@ -42,7 +42,7 @@ function UserProfile({
                         .map((friendship) => friendship.get('friend'))
                         .push(loggedInUser)
                         .filter((friend) => friend.get('id') === profileId).get(0, I.Map());
-
+  const nitsForCurrentUser = allNits.filter((nit) => nit.getIn(['user', 'id']) === profileUser.get('id'));
   return (
     <Container size={2} center>
       <div style={{position: 'relative', zIndex: 3000, marginTop: '-175px'}}>
@@ -103,8 +103,8 @@ function UserProfile({
 
           <div>
             {
-              allNits.length > 0
-              ? <NitList nitList={allNits}/>
+              nitsForCurrentUser.size > 0
+              ? <NitList nitList={nitsForCurrentUser}/>
               : <div className="h3 pt2 center caps" style={{color: C.grey400}}>
                   no public nits found
                 </div>
