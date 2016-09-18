@@ -8,8 +8,6 @@ import FontAwesome from 'react-fontawesome';
 import NitList from '../components/nit-list';
 import * as NitActions from '../action-creators/nit';
 
-// import * as MOCK_NITS_FOR_MAAZ from '../constants/mock-db.json';
-
 function mapStateToProps() {
   return {};
 }
@@ -17,14 +15,17 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     saveNitToDb: () => dispatch(NitActions.saveNitToDb()),
-    saveNitToState: (nitInfo) => dispatch(NitActions.saveNitToState(nitInfo)),
+    saveNitToState: (nitInfo) => {
+      dispatch(NitActions.saveNitToState(nitInfo));
+    },
   };
 }
 
-function UserProfile({ params: { profileId }}, saveNitToDb, saveNitToState ) {
+function UserProfile({ params: { profileId }, saveNitToDb, saveNitToState }) {
   const NITS_FOR_CURRENT_USER = MOCK_NITS_FOR_MAAZ.nits.filter((nit) =>
     nit.user.id === Number(profileId
   ));
+
   return (
     <Container size={2} center>
       <div>

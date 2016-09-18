@@ -17,7 +17,9 @@ export const saveNitToDb = () => {
   };
 };
 
-export const saveNitToState = ReduxActions.createAction(
-  C.NIT_ACTIONS.SAVE_USER_NIT_STATE,
-  ({ id, nitContent }) => ({ payload: {id, nitContent} }),
-);
+export const saveNitToState = ({ id, nitContent }) => {
+  return {
+    type: C.NIT_ACTIONS.SAVE_USER_NIT_STATE,
+    payload: { id, nitContent },
+  };
+};
