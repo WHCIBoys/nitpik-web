@@ -4,6 +4,7 @@ import { fromJS } from 'immutable';
 
 const INITIAL_STATE = fromJS({
   token: null,
+  accessToken: null,
   user: {},
   hasError: false,
   isLoading: false,
@@ -23,7 +24,7 @@ function sessionReducer(state = INITIAL_STATE, action = {}) {
   case C.AUTH_ACTIONS.LOGIN_USER_SUCCESS:
     return state.merge(fromJS({
       token: action.payload.token,
-      user: action.payload.profile,
+      accessToken: action.payload.accessToken,
       hasError: false,
       isLoading: false,
     }));

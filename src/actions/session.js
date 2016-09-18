@@ -1,22 +1,18 @@
-import { login } from '../api/auth/';
-
 import * as C from '../constants';
 
-export function loginUser() {
-  return (dispatch) => {
-    return dispatch({
-      types: [
-        C.AUTH_ACTIONS.LOGIN_USER_PENDING,
-        C.AUTH_ACTIONS.LOGIN_USER_SUCCESS,
-        C.AUTH_ACTIONS.LOGIN_USER_ERROR,
-      ],
-      payload: {
-        promise: login()
-          .then((res) => {
-            return res;
-          }),
-      },
-    });
+export function loginUser(accessToken, jwtToken) {
+  return {
+    type: C.AUTH_ACTIONS.LOGIN_USER_SUCCESS,
+    payload: {
+      accessToken,
+      token: jwtToken,
+    },
+  };
+}
+
+export function requestLogin() {
+  return {
+    type: C.AUTH_ACTIONS.LOGIN_USER_PENDING,
   };
 }
 

@@ -58,6 +58,7 @@
     "history": "^3.0.0",
     "html-webpack-plugin": "^2.9.0",
     "immutable": "^3.7.5",
+    "isemail": "^2.2.1",
     "isomorphic-fetch": "^2.2.1",
     "istanbul": "^1.0.0-alpha.2",
     "istanbul-instrumenter-loader": "^0.2.0",

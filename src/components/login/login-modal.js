@@ -7,6 +7,7 @@ import Button from '../button';
 function LoginModal({ isVisible, onSubmit }) {
   return (
     <Modal testid="login-form" isVisible={ isVisible }>
+      <a href="http://api.nitpik.me/oauth2/facebook">
       <Button className="bg-blue white" onClick={onSubmit}>
         <div className="flex items-center">
           <FontAwesome
@@ -16,6 +17,7 @@ function LoginModal({ isVisible, onSubmit }) {
           <div className="mx2 items-center"> Sign in with Facebook! </div>
         </div>
       </Button>
+      </a>
     </Modal>
   );
 }

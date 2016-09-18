@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import { logoutUser, loginUser } from '../actions/session';
+import { logoutUser, requestLogin } from '../actions/session';
 import { getNits } from '../action-creators';
 
 import { Link } from 'react-router';
@@ -11,6 +11,8 @@ import Content from '../components/content';
 import LoginModal from '../components/login/login-modal';
 import Navigator from '../components/navigator';
 import NavigatorItem from '../components/navigator-item';
+import Container from '../components/container';
+import Loader from '../components/ui/loader';
 
 function mapStateToProps(state) {
   return {
@@ -21,7 +23,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: () => dispatch(loginUser()),
+    login: () => dispatch(requestLogin()),
     logout: () => dispatch(logoutUser()),
     openUserProfile: (userId) => dispatch(push(`/profile/${userId}`)),
     fetchNits: (userId) => dispatch(getNits(userId)),
@@ -30,9 +32,18 @@ function mapDispatchToProps(dispatch) {
 
 function App({ children, session, login, logout, openUserProfile }) {
   const token = session.get('token', false);
+  const isFetching = session.get('isLoading', false);
   const isLoggedIn = token && token !== null && typeof token !== 'undefined';
   const firstName = session.getIn(['user', 'first'], '');
   const lastName = session.getIn(['user', 'last'], '');
+
+  if (isFetching) {
+    return (
+      <Container>
+        <Loader/>
+      </Container>
+    );
+  }
 
   return (
     <div>
@@ -44,9 +55,6 @@ function App({ children, session, login, logout, openUserProfile }) {
       <Navigator testid="navigator" isVisible={ isLoggedIn }>
         <NavigatorItem isVisible={ isLoggedIn } mr>
           <Link to="/">Home</Link>
-        </NavigatorItem>
-        <NavigatorItem isVisible={ isLoggedIn }>
-          <Link to="/about">About Us</Link>
         </NavigatorItem>
         <div className="flex flex-auto" />
         <NavigatorItem isVisible={ isLoggedIn } mr>

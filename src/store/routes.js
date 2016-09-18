@@ -5,7 +5,8 @@ import App from '../containers/app';
 import AboutPage from '../containers/about-page';
 import HomePage from '../containers/home-page';
 import UserProfile from '../containers/user-profile';
-import * as AuthActionCreators from '../action-creators/auth';
+import * as SessionActions from '../actions/session';
+import a$ync from '../utils/a$ync';
 
 const profileQuery = (nextState) => {
   const { params: { profileId } } = nextState;
@@ -17,7 +18,7 @@ export default (store) => (
   <Route path="/" component={ App }>
     <IndexRoute component={ HomePage }/>
     <Route path="about" component={ AboutPage }/>
-    <Route path="login/facebook" onEnter={() => login(store)}/>
+    <Route path="login/facebook" onEnter={() => a$ync(login)(store)}/>
     <Route onEnter={profileQuery} path="profile/:profileId" component={ UserProfile }/>
   </Route>
 );
@@ -28,14 +29,15 @@ export function login(store) {
     routing: {
       locationBeforeTransitions: {
         query: {
-          access_token: accessToken,
+          access_code: accessToken,
+          jwt: jwtToken,
         },
       },
     },
   } = currentState;
 
-  if (accessToken) {
-    store.dispatch(AuthActionCreators.getUserInfo(accessToken));
+  if (accessToken && jwtToken) {
+    store.dispatch(SessionActions.loginUser(accessToken, jwtToken));
   }
 
   return store.dispatch(push('/'));

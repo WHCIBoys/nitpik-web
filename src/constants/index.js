@@ -16,3 +16,4 @@ export const FAV_FRIENDS_LIST = [{
 }];
 
 export * from './actions';
+export * from './styles';
