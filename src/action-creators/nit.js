@@ -1,19 +1,19 @@
 import * as C from '../constants';
+import * as fetchr from '../utils/fetchr';
 
 export const saveNitToDb = () => {
   return (dispatch) => {
-    return fetch(`${C.FACEBOOK_GRAPH_URL}me?fields=id,name`)
-      .then((res) => {
-        console.log(res);
-        dispatch(
-          { type: C.AUTH_ACTIONS.GET_USER_INFO_SUCCESS, payload: res }
-        );
-      })
-      .catch((err) => {
-        dispatch(
-          { type: C.AUTH_ACTIONS.GET_USER_INFO_ERROR, payload: err }
-        );
-      });
+    return fetchr.post('nits', {})
+    .then((res) => {
+      dispatch(
+        { type: C.AUTH_ACTIONS.GET_USER_INFO_SUCCESS, payload: res }
+      );
+    })
+    .catch((err) => {
+      dispatch(
+        { type: C.AUTH_ACTIONS.GET_USER_INFO_ERROR, payload: err }
+      );
+    });
   };
 };
 

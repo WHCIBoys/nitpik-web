@@ -55,7 +55,7 @@ function _enableHotLoader(store) {
 
 function _getStorageConfig() {
   return {
-    key: 'react-redux-seed',
+    key: 'nitpik',
     serialize: (store) => {
       return store && store.session ?
         JSON.stringify(store.session.toJS()) : store;
